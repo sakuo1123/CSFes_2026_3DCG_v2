@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>CS2026｜Coming Soon...</title>
+<style>
+/* ★編集ポイント
+   背景画像：--bg-image に画像のパスを指定（画像がなくても青緑のグラデーションで表示されます）
+   文字：下の <body> 内の文章をそのまま書き換え */
+:root{
+  --bg-image:url("./Renban/0428.jpg");   /* ★背景にぼかして使う画像（サイトと同じ雰囲気） */
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:#0a1112;color:#fff;
+  font-family:"Hiragino Kaku Gothic ProN","Yu Gothic",Arial,sans-serif}
+
+/* 背景：本編のオープニング前と同じ「ぼかし＋暗いベール」 */
+.bg{position:fixed;inset:-24px;
+  background-image:var(--bg-image),linear-gradient(160deg,#2a8a82 0%,#1f6b66 38%,#0e3a3b 100%);
+  background-size:cover;background-position:center;filter:blur(8px)}
+.veil{position:fixed;inset:0;background:rgba(5,8,9,.6)}
+
+/* 左上の固定ヘッダー（本編と同じ） */
+header{position:fixed;z-index:2;left:0;top:0;right:0;pointer-events:none;
+  padding:max(14px,env(safe-area-inset-top)) 16px 26px;
+  font-size:14px;font-weight:600;letter-spacing:.14em;
+  background:linear-gradient(rgba(0,0,0,.4),transparent);text-shadow:0 1px 6px rgba(0,0,0,.5)}
+
+/* 中央の文字 */
+main{position:relative;z-index:1;min-height:100svh;display:grid;place-items:center;
+  padding:max(24px,env(safe-area-inset-top)) 24px max(24px,env(safe-area-inset-bottom));
+  text-align:center;animation:in 1.4s ease both}
+/* 回る立方体（大きさは --cube、色は border / background で変更） */
+.scene{--cube:56px;width:var(--cube);height:var(--cube);margin:0 auto 40px;perspective:420px;
+  filter:drop-shadow(0 0 10px rgba(95,201,193,.4))}
+.cube{position:relative;width:100%;height:100%;transform-style:preserve-3d;
+  transform:rotateX(-25deg) rotateY(30deg);animation:spin 10s linear infinite}
+.cube i{position:absolute;inset:0;border:1.5px solid rgba(255,255,255,.85);background:rgba(95,201,193,.14)}
+.cube i:nth-child(1){transform:rotateY(0deg) translateZ(calc(var(--cube)/2))}
+.cube i:nth-child(2){transform:rotateY(90deg) translateZ(calc(var(--cube)/2))}
+.cube i:nth-child(3){transform:rotateY(180deg) translateZ(calc(var(--cube)/2))}
+.cube i:nth-child(4){transform:rotateY(-90deg) translateZ(calc(var(--cube)/2))}
+.cube i:nth-child(5){transform:rotateX(90deg) translateZ(calc(var(--cube)/2))}
+.cube i:nth-child(6){transform:rotateX(-90deg) translateZ(calc(var(--cube)/2))}
+@keyframes spin{from{transform:rotateX(-25deg) rotateY(0deg)}to{transform:rotateX(335deg) rotateY(360deg)}}
+.k{font-size:11px;letter-spacing:.25em;opacity:.7}
+.t{font-size:clamp(26px,8vw,40px);letter-spacing:.12em;margin:14px 0 30px;font-weight:400}
+.t .dots span{animation:blink 1.8s infinite both}
+.t .dots span:nth-child(2){animation-delay:.3s}
+.t .dots span:nth-child(3){animation-delay:.6s}
+.names{margin-top:34px;font-size:13px;line-height:2;letter-spacing:.12em;opacity:.85}
+
+@keyframes in{from{opacity:0;transform:translateY(12px)}}
+@keyframes blink{0%,100%{opacity:.15}40%,60%{opacity:1}}
+@media (prefers-reduced-motion:reduce){main,.t .dots span,.cube{animation:none}}
+</style>
+</head>
+<body>
+  <div class="bg"></div>
+  <div class="veil"></div>
+  <header>CS Festival 2026</header>
+
+  <main>
+    <div>
+      <div class="scene"><div class="cube"><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+      <div class="k">CS2026 / EXHIBITION</div>
+      <div class="t">Coming Soon<span class="dots"><span>.</span><span>.</span><span>.</span></span></div>
+      <!-- 開催日を入れたいときは、この下に <div class="k">2026.00.00 OPEN</div> のように1行足せます -->
+      <div class="names">3DCG同好会<br>仮想空間研究会<br>ゲーム研究会</div>
+    </div>
+  </main>
+</body>
+</html>
